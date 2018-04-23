@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Metronome</title>
+  <meta name="description" content="A simple Metronome website">
+  <meta name="author" content="Paul Dejardin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <img id="BackgroundImage" src="<?php echo $backgroundImg?>" atl=""></img>
+    <div id="PageContainer">
+        <div class="vertical-align-box">
+            <div class="vertical-align-cell">
+                <header>
+                    <h1>Stopping by Woods...</h1>
+                    <div>Steve and Pam Bernardo Herd</div>
+                    <div id="ContentLinks">
+                        <!-- populated by the page-template script with links to sections in the content -->
+                    </div>
+                </header>
+            </div>
+        </div>
+        <section id="Content">
+            <?php include $content;?>
+        </section>
+        <footer>
+        </fotter>
+    </div>
+    <script src="page-template/page-template.js"></script>
+</body>
+</html>

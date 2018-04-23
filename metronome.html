@@ -1,0 +1,68 @@
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+    
+      <title>Metronome</title>
+      <meta name="author" content="Paul Dejardin">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+      <link rel="stylesheet" href="metronome.css">
+    </head>
+    
+    <body>
+        <div id="container">
+            <div id="TheMetronome" class="metronome">
+                <div class="metronome-casing">
+                </div>
+                <div class="metronome-pendulum">
+                    <div class="metronome-adjustable-weight">
+                    </div>
+                </div>
+                <div class="metronome-static-weight">
+                </div>
+                <div class="metronome-winder">
+                </div>
+                <div class="metronome-gears">
+                </div>
+            </div>
+            <input type="range" min="40" max="208" value="40" class="slider" id="BeatsPerMinuteSlider">
+            <div id="BeatsPerMinute"></div>
+        </div>
+        <script>
+            var BPMSlider = document.getElementById('BeatsPerMinuteSlider');
+            var BPMTextBox = document.getElementById('BeatsPerMinute');
+            var MetronomePendulum = document.querySelector('#TheMetronome .metronome-pendulum');
+            var MetronomeAdjustableWeight = document.querySelector('#TheMetronome .metronome-adjustable-weight');
+
+            // pendulum length
+            // l = g * (T / 2 * Pi)^2;
+
+            function caclPendulumLength(bpm) {
+                var pendulumDuration = 2 * 60 / bpm;
+                return G * Math.pow(pendulumDuration / 2 * Math.PI, 2);
+            }
+
+            var G = 9.807;
+            var MinBeatsPerMinute = 40;
+            var MaxBeatsPerMinute = 208;
+            var MaxPendulumLength = caclPendulumLength(MinBeatsPerMinute);
+            var MinPendulumLength = caclPendulumLength(MaxBeatsPerMinute);
+
+            function setBeatsPerMinute(bpm) {
+                var pendulumDuration = 2 * 60 / bpm;
+                var pendulumLength = caclPendulumLength(bpm);
+                MetronomePendulum.style['animation-duration'] = pendulumDuration + 's';
+                BPMTextBox.innerHTML = bpm;
+                var scalingLength = MetronomePendulum.offsetHeight;
+                var topOffset = scalingLength - (scalingLength * pendulumLength / MaxPendulumLength);
+                MetronomeAdjustableWeight.style.top = topOffset;
+            }
+
+            setBeatsPerMinute(BPMSlider.value);
+            BPMSlider.oninput = function() {
+                setBeatsPerMinute(this.value);
+            }
+        </script>
+    </body>
+    </html>
+    

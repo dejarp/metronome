@@ -1,0 +1,49 @@
+#container {
+    background: teal;
+    margin: 50px;
+    height: 300px;
+    width: 200px;
+}
+
+#BeatsPerMinuteSlider {
+    width: 100%;
+}
+
+#BeatsPerMinute {
+    width: 20px;
+    background: red;
+}
+
+.metronome {
+    text-align: center;
+}
+
+.metronome .metronome-pendulum {
+    display: inline-block;
+    width: 2px;
+    height: 100%;
+    background: black;
+    border-radius: 5px;
+    position: relative;
+    transform-origin: 50% 100%;
+    animation: moveIt 2.5s ease-in-out infinite;
+}
+
+.metronome .metronome-adjustable-weight {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background: black;
+    border-radius: 5px;
+    position: relative;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes moveIt {
+    0%, 100% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(-45deg);
+    }
+  }
